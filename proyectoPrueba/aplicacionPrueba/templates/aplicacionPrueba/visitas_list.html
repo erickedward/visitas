@@ -1,0 +1,71 @@
+{% extends 'aplicacionPrueba/base.html' %}
+
+{% block boton %}<a href="{% url 'visita_add' %}" class="top-boton"><span class="glyphicon glyphicon-plus"></span></a>{% endblock %}
+
+{% block contenido %}
+    {% load staticfiles %}
+    <div class="row">
+    
+    {% for visitas in visit %}
+        
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <p align="right">
+                {% if not visitas.fecha_hora_salida %}
+
+                        <a class="btn btn-primary" href="{% url 'visita_editar' pk=visitas.pk %}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+  
+
+
+                        <a class="btn btn-success" href="{% url 'visita_salida' pk=visitas.pk %}">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </a>
+
+                {% else %}
+
+                        <a class="btn btn-danger" href="{% url 'visita_eliminar' pk=visitas.pk %}">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+
+                {% endif %}
+                </p>
+                <img src="{% static 'img/no_foto.jpeg' %}" alt="Usuario sin Foto" class="img-responsive img-circle" width="150px">
+              
+              <div class="caption">
+                <h3><a href="">{{ visitas.p_apellido|upper }} {{ visitas.p_nombre|upper }}</a></h3>
+                <p class="entrada_salida">Departamento: {{ visitas.dpto_visita.nombre_dpto }}<br>
+                Ingreso: {{ visitas.fecha_hora_entrada }}<br>
+                Salida: {% if visitas.fecha_hora_salida %} {{ visitas.fecha_hora_salida }} {% endif %}</p>
+
+              </div>
+            </div>
+          </div>
+        
+    {% endfor %}
+    </div>
+
+
+    {% if p_anterior or p_siguiente %}
+        <ul class="pager">
+            {% if p_anterior %} <li><a href="{% url 'visitas_paginacion' pag=p_anterior %}"><<</a></li> {% endif %}
+            
+            {% for pagina in paginas %}
+                <li><a href="{% url 'visitas_paginacion' pag=pagina %}">{{ pagina }}</a></li>
+            {% endfor %}
+
+            {% if p_siguiente %} <li><a href="{% url 'visitas_paginacion' pag=p_siguiente %}">>></a></li> {% endif %}
+            <br>
+        </ul>
+    {% endif %}
+    {% if desc_paginacion %}
+        <div class="paginacion">
+            {% for desc in desc_paginacion %}{{ desc }}<br>{% endfor %}
+        </div>
+    {% else %}
+        <div class="col-md-2"></div><div class="alert alert-warning col-md-8" >
+          <strong><center>No existen registros</center></strong>
+        </div>
+    {% endif %}
+{% endblock %}

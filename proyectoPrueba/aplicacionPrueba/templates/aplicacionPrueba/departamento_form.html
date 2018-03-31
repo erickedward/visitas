@@ -1,0 +1,22 @@
+{% extends 'aplicacionPrueba/base.html' %}
+
+{% block boton %}<a href="{% url 'departamentos' pag=1 %}" class="top-boton"><span class="glyphicon glyphicon-chevron-left"></span></a>{% endblock %}
+
+{% block buscador %}{% endblock %}
+
+{% block contenido %}
+    <center><h1>Nuevo Departamento</h1></center>
+    <br>
+    <div class="row">
+    	<div class="col-md-3" ></div>
+	    <div class="col-md-6" >
+		    <form method="POST" class="post-form">{% csrf_token %}
+		        {{ form.as_p }}
+		        <button type="submit" class="btn btn-success save">Agregar Departamento</button>
+		    </form>
+	    </div>
+	    <div class="col-md-3" ></div>	
+	</center>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'aplicacionPrueba/base.html' %}
+
+{% block boton %}<a href="{% url 'departamento_add' %}" class="top-boton"><span class="glyphicon glyphicon-plus"></span></a>{% endblock %}
+
+{% block contenido %}
+    {% load staticfiles %}
+    <div class="row tabla_list">
+	    <table class="table" >
+			<thead class="thead-dark">
+			    <tr>
+				    <th scope="col">Piso</th>
+				    <th scope="col">Departamento</th>
+				    <th scope="col">Descripción</th>
+				    <th scope="col">&nbsp;</th>
+				    <th scope="col">&nbsp;</th>
+			    </tr>
+			</thead>
+	 		<tbody>
+    {% for datos in rs %}
+		    <tr>
+			    <th scope="row">{{ datos.piso|upper }}</th>
+			    <td>{{ datos.nombre_dpto|upper }}</td>
+			    <td>{{ datos.descripcion|upper }}</td>
+			    <td>
+			    	<a class="btn btn-primary" href="{% url 'departameto_editar' pk=datos.pk %}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </td>
+			    <td>
+			    	<a class="btn btn-danger" href="{% url 'departameto_eliminar' pk=datos.pk %}">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+			    </td>
+		    </tr>
+    {% endfor %}
+		    </tbody>
+		</table>
+    </div>
+
+    {% if p_anterior or p_siguiente %}
+        <ul class="pager">
+            {% if p_anterior %} <li><a href="{% url 'departamentos' pag=p_anterior %}"><<</a></li> {% endif %}
+            
+            {% for pagina in paginas %}
+                <li><a href="{% url 'departamentos' pag=pagina %}">{{ pagina }}</a></li>
+            {% endfor %}
+
+            {% if p_siguiente %} <li><a href="{% url 'departamentos' pag=p_siguiente %}">>></a></li> {% endif %}
+            <br>
+        </ul>
+    {% endif %}
+    {% if desc_paginacion %}
+        <div class="paginacion">
+            {% for desc in desc_paginacion %}{{ desc }}<br>{% endfor %}
+        </div>
+    {% else %}
+        <div class="col-md-2"></div><div class="alert alert-warning col-md-8" >
+          <strong><center>No existen registros</center></strong>
+        </div>
+    {% endif %}
+{% endblock %}
+

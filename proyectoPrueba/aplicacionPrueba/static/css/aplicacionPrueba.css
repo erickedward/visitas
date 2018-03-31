@@ -1,0 +1,151 @@
+h1 a {
+        color: #FF8000;
+        font-family: 'Lobster';
+    }
+
+body {
+    padding-top: 51px;
+}
+
+.page-header {
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+.top-boton , .top-boton a, .top-boton a:hover, .top-boton a:visited, .top-boton a:active {
+    color: #ff9400;
+    margin-right: 15px;
+    margin-top: 8px;
+    font-size: 20pt;
+    text-decoration: none;
+    float: right;
+
+}
+
+.nombre_pagina {
+    margin-top: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.nombre_pagina a {
+    font-size: 20pt;
+    font-family: 'Lobster', cursive;
+    font-color: #000000;
+    color: #000000;
+    text-decoration: none;
+}
+
+.nombre_pagina img {
+    width: 25px; height: 25px;
+    margin-top: -8px;
+    margin-right: 5px;
+}
+.content {
+    margin-left: 40px;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Lobster', cursive;
+}
+
+.date {
+    float: left;
+    color: #828282;
+}
+
+.entrada_salida {
+    color: #828282;
+}
+
+.paginacion {
+    font-size: 10pt;
+    color: #828282;
+    text-align: center;
+}
+
+
+.save {
+    float: right;
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+}
+
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #ffffff;
+    float: right;
+    font-size: 26pt;
+    margin-right: 20px;
+} 
+
+.post {
+    margin-bottom: 70px;
+}
+
+.post h1 a, .post h1 a:visited {
+    color: #000000;
+}
+
+
+.contenido {
+    float: right;
+    padding: 10px 30px 50px 10px;
+
+}
+
+.barra_menu {
+    background: #F2F2F2;
+    position: fixed;
+    z-index: 1000;
+    bottom: 0;
+    top: 51px;
+    padding: 0;
+
+}
+
+.botones_barra_menu {
+    list-style: none;
+    padding: 0;
+}
+
+.botones_barra_menu a li {
+    background: #F2F2F2;
+    padding: 5px 0 5px 25px;
+    margin:1px 0 0 0;
+    text-align: left;
+    font-size: 10pt;
+}
+
+.botones_barra_menu a li:hover {
+    background: #D8D8D8;
+}
+.botones_barra_menu a {
+    color: #000000;
+    text-decoration: none;
+}
+
+
+
+.contenido {
+
+
+}
+
+.mensaje_principal {
+    margin: 50px;
+}
+
+.tabla_list {
+    margin-left: 50px;
+    margin-right: 50px;
+}

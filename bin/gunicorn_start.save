@@ -1,0 +1,33 @@
+#!/bin/bash
+
+NAME="taller_django"                           # Nombre de la aplicacion
+DJANGODIR=/var/www/envPrueba/proyectoPrueba    # Directorio del proyecto Django
+SOCKFILE=/var/www/envPrueba/run/gunicorn.sock  # Nos comunicaremos usando este socket unix
+USER=usuario                                   # El usuario que ejecuta la app
+GROUP=root                                     # El grupo que ejecuta la app
+NUM_WORKERS=1                                  # Cuantos trabajadores procesaran Gunicorn (cant. de procesadores + 1).
+DJANGO_SETTINGS_MODULE=proyectoPrueba.settings # Que archivo de configuración usará Django
+DJANGO_WSGI_MODULE=proyectoPrueba.wsgi         # Nombre del módulo WSGI
+
+echo "Iniciando $NAME as `whoami`"
+
+# Activar el entorno virtual
+cd $DJANGODIR
+source ../bin/activate
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+
+# Crea el directorio run en caso de que no exista
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+# Iniciar la app Django con gunicorn
+# Los programas que están supuestos a usar supervisor no deben usar demonios (no usar --daemon)
+exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+  --name $NAME \
+  --workers $NUM_WORKERS \
+  --user=$USER --group=$GROUP \
+  --bind=
+unix:$SOCKFILE \
+  --log-level=debug \
+  --log-file=-
